@@ -169,6 +169,7 @@ main {
   background: var(--clr-primary-5);
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 2rem;
 }
 
 .single-tour {

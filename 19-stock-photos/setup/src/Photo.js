@@ -1,7 +1,28 @@
-import React from 'react'
+import React from 'react';
 
-const Photo = () => {
-  return <h2>photo component</h2>
-}
+const Photo = (prop) => {
+  const {
+    urls: { regular },
+    alt_description,
+    user: {
+      name,
+      portfolio_url,
+      profile_image: { medium },
+    },
+    likes,
+  } = prop;
+  return (
+    <article className='photo'>
+      <img src={regular} alt={alt_description} />
+      <div className='photo-info'>
+        <h4>{name}</h4>
+        <p>{likes} likes</p>
+        <a href={portfolio_url}>
+          <img src={medium} alt={name} className='user-img' />
+        </a>
+      </div>
+    </article>
+  );
+};
 
-export default Photo
+export default Photo;

@@ -158,6 +158,7 @@ Menu
 }
 .btn-container {
   margin-bottom: 4rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
 }
