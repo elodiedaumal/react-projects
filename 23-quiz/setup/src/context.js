@@ -50,12 +50,28 @@ const AppProvider = ({ children }) => {
     setQuestionIndex((oldIndex) => {
       const questionIndex = oldIndex + 1;
       if (questionIndex > questions.length - 1) {
-        // setIsModalOpen(true);
+        openModal();
         return 0;
       } else {
         return questionIndex;
       }
     });
+  };
+
+  const handleAnswer = (value) => {
+    if (value) {
+      setCorrectAnswer((oldanswer) => oldanswer + 1);
+    }
+    clickNextQuestion();
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setHomeWaiting(true);
+    setCorrectAnswer(0);
   };
 
   useEffect(() => {
@@ -72,6 +88,8 @@ const AppProvider = ({ children }) => {
         error,
         isModalOpen,
         clickNextQuestion,
+        handleAnswer,
+        closeModal,
       }}
     >
       {children}

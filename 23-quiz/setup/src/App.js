@@ -14,6 +14,7 @@ function App() {
     error,
     isModalOpen,
     clickNextQuestion,
+    handleAnswer,
   } = useGlobalContext();
   if (homeWaiting) {
     return <SetupForm />;
@@ -28,14 +29,9 @@ function App() {
     questions[questionIndex];
   const answers = [...incorrect_answers, correct_answer];
 
-  // const handleAnswer((e)=>{
-
-  //   console.log(answers);
-  // })
-
   return (
     <main>
-      {/* <Modal /> */}
+      <Modal />
       <section className='quiz'>
         <p className='correct-answers'>
           correct answers: {correctAnswer} / {questionIndex}
@@ -44,20 +40,20 @@ function App() {
           <h2 dangerouslySetInnerHTML={{ __html: question }} />
 
           <div className='btn-container'>
-            {answers.map((answers, index) => {
+            {answers.map((answer, index) => {
               return (
                 <button
                   className='answer-btn'
                   key={index}
-                  dangerouslySetInnerHTML={{ __html: answers }}
-                  // onClick={handleAnswer}
+                  dangerouslySetInnerHTML={{ __html: answer }}
+                  onClick={() => handleAnswer(correct_answer === answer)}
                 ></button>
               );
             })}
           </div>
         </article>
         <button className='next-question' onClick={clickNextQuestion}>
-          Next Questions
+          Skip Question
         </button>
       </section>
     </main>
