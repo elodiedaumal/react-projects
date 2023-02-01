@@ -27,8 +27,16 @@ function App() {
   }
   const { incorrect_answers, correct_answer, question } =
     questions[questionIndex];
-  const answers = [...incorrect_answers, correct_answer];
+  // const answers = [...incorrect_answers, correct_answer];
+  let answers = [...incorrect_answers];
 
+  const getRandomInt = Math.floor(Math.random() * 4);
+  if (getRandomInt === 3) {
+    answers.push(correct_answer);
+  } else {
+    answers.push(answers[getRandomInt]);
+    answers[getRandomInt] = correct_answer;
+  }
   return (
     <main>
       <Modal />

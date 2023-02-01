@@ -10,7 +10,7 @@ const table = {
 
 const API_ENDPOINT = 'https://opentdb.com/api.php?';
 
-const url = 'https://opentdb.com/api.php?';
+const url = '';
 const tempurl =
   'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
 
