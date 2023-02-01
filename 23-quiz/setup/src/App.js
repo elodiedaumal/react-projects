@@ -13,6 +13,7 @@ function App() {
     correctAnswer,
     error,
     isModalOpen,
+    clickNextQuestion,
   } = useGlobalContext();
   if (homeWaiting) {
     return <SetupForm />;
@@ -23,8 +24,14 @@ function App() {
   if (isModalOpen) {
     return <Modal />;
   }
-  const { incorrect_answers, correct_answer, question } = questions[0];
+  const { incorrect_answers, correct_answer, question } =
+    questions[questionIndex];
   const answers = [...incorrect_answers, correct_answer];
+
+  // const handleAnswer((e)=>{
+
+  //   console.log(answers);
+  // })
 
   return (
     <main>
@@ -43,12 +50,15 @@ function App() {
                   className='answer-btn'
                   key={index}
                   dangerouslySetInnerHTML={{ __html: answers }}
-                  onClick={}
+                  // onClick={handleAnswer}
                 ></button>
               );
             })}
           </div>
         </article>
+        <button className='next-question' onClick={clickNextQuestion}>
+          Next Questions
+        </button>
       </section>
     </main>
   );

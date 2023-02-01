@@ -46,9 +46,21 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const clickNextQuestion = () => {
+    setQuestionIndex((oldIndex) => {
+      const questionIndex = oldIndex + 1;
+      if (questionIndex > questions.length - 1) {
+        // setIsModalOpen(true);
+        return 0;
+      } else {
+        return questionIndex;
+      }
+    });
+  };
+
   useEffect(() => {
     fetchQuestion(tempurl);
-  }, []);
+  }, [questionIndex]);
   return (
     <AppContext.Provider
       value={{
@@ -59,6 +71,7 @@ const AppProvider = ({ children }) => {
         correctAnswer,
         error,
         isModalOpen,
+        clickNextQuestion,
       }}
     >
       {children}
