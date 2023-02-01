@@ -5,11 +5,12 @@ const table = {
   sports: 21,
   history: 23,
   politics: 24,
+  celebrities: 26,
 };
 
 const API_ENDPOINT = 'https://opentdb.com/api.php?';
 
-const url = '';
+const url = 'https://opentdb.com/api.php?';
 const tempurl =
   'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
 
@@ -23,6 +24,11 @@ const AppProvider = ({ children }) => {
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [error, setError] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [quiz, setQuizz] = useState({
+    amountQuestions: 10,
+    category: 'sport',
+    difficulty: 'easy',
+  });
 
   const fetchQuestion = async (url) => {
     setLoading(true);
@@ -74,9 +80,19 @@ const AppProvider = ({ children }) => {
     setCorrectAnswer(0);
   };
 
-  useEffect(() => {
-    fetchQuestion(tempurl);
-  }, [questionIndex]);
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setQuizz({ ...quiz, [name]: [value] });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { amountQuestions, category, difficulty } = quiz;
+    const url = `${API_ENDPOINT}amount=${amountQuestions}&category=${table[category]}&difficulty=${difficulty}&type=multiple`;
+    fetchQuestion(url);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -90,6 +106,9 @@ const AppProvider = ({ children }) => {
         clickNextQuestion,
         handleAnswer,
         closeModal,
+        handleSubmit,
+        handleChange,
+        quiz,
       }}
     >
       {children}
